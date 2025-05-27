@@ -15,6 +15,7 @@
     <small>
     {{$project->content}}
     </small>
+    <h4>Linguaggio di programmazione: {{$project->type->name}}</h4>
 </div>
 
 <section>
