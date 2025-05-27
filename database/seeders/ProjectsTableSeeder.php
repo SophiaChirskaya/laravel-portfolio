@@ -22,6 +22,7 @@ class ProjectsTableSeeder extends Seeder
             $newProject->title = $faker->sentence();
             $newProject->content = $faker->paragraph(12);
             $newProject->image = $faker->mimeType();
+            $newProject->type_id = rand(1, 5);
 
             $newProject->save();
         }
