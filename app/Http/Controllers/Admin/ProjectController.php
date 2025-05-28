@@ -38,6 +38,7 @@ class ProjectController extends Controller
 
         $newProject->title = $data['title'];
         $newProject->content = $data['content'];
+        $newProject->type_id = $data['type_id'];
         $newProject->image = $data['image'];
 
         $newProject->save();
@@ -58,7 +59,8 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view("projects.edit", compact("project"));
+        $types = Type::all();
+        return view("projects.edit", compact("project", "types"));
     }
 
     /**
@@ -70,6 +72,7 @@ class ProjectController extends Controller
 
         $project->title = $data['title'];
         $project->content = $data['content'];
+        $project->type_id = $data['type_id'];
         $project->image = $data['image'];
 
         $project->update();
