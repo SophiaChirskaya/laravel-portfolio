@@ -48,7 +48,11 @@ class ProjectController extends Controller
 
         $newProject->save();
 
-        $newProject->technologies()->attach($data['technologies']);
+        if($request->has('tags')) {
+
+            $newProject->technologies()->attach($data['technologies']);
+
+        }
 
         return redirect()->route("projects.show", $newProject);
     }
@@ -86,7 +90,14 @@ class ProjectController extends Controller
 
         $project->update();
 
-        $project->technologies()->sync($data['technologies']);
+        if($request->has('tags')) {
+
+            $project->technologies()->sync($data['technologies']);
+
+        } else {
+
+            $project->technologies()->detach();
+        }
 
         return redirect()->route("projects.show", $project);
     }
