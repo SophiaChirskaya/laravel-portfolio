@@ -48,7 +48,7 @@ class ProjectController extends Controller
 
         $newProject->save();
 
-        if($request->has('tags')) {
+        if($request->has('technologies')) {
 
             $newProject->technologies()->attach($data['technologies']);
 
@@ -90,7 +90,7 @@ class ProjectController extends Controller
 
         $project->update();
 
-        if($request->has('tags')) {
+        if($request->has('technologies')) {
 
             $project->technologies()->sync($data['technologies']);
 
