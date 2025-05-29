@@ -67,8 +67,9 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $types = Type::all();
+        $technologies = Technology::all();
         
-        return view("projects.edit", compact("project", "types"));
+        return view("projects.edit", compact("project", "types", "technologies"));
     }
 
     /**
@@ -84,6 +85,8 @@ class ProjectController extends Controller
         $project->image = $data['image'];
 
         $project->update();
+
+        $project->technologies()->sync($data['technologies']);
 
         return redirect()->route("projects.show", $project);
     }

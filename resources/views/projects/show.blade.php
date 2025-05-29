@@ -11,11 +11,19 @@
 </button>
     
 </div>
-<div class="mb-4">
+<div class="mb-4 d-flex flex-column">
     <small>
     {{$project->content}}
     </small>
     <h4>Linguaggio di programmazione: {{$project->type->name}}</h4>
+    
+    @if(count($project->technologies) > 0 )
+    <small>
+      @foreach($project->technologies as $technology)
+      <span class="badge" style="background-color: {{$technology->color}}">{{$technology->name}}</span>
+      @endforeach
+    </small>
+    @endif
 </div>
 
 <section>
