@@ -9,3 +9,5 @@ use Illuminate\Support\Facades\Route;
 // })->middleware('auth:sanctum');
 
 Route::get("projects", [ProjectController::class, "index"]);
+
+Route::get("projects/{project}", [ProjectController::class, "show"]);
