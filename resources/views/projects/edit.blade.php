@@ -4,7 +4,7 @@
 
 @section("content")
 
-<form action="{{ route("projects.update", $project) }}" method="POST">
+<form action="{{ route("projects.update", $project) }}" method="POST" enctype="multipart/form-data">
     @csrf
     @method("PUT")
     <div class="form-control mb-3 d-flex flex-column">
@@ -35,9 +35,15 @@
         @endforeach    
     </div>
 
-    <div class="form-control mb-3 d-flex flex-column">
-        <label for="image">Image</label>
-        <input type="file" name="image" id=image>
+    <div class="form-control mb-3 d-flex flex-wrap gap-3">
+        <label for="image">Immagine</label>
+        <input id="image" name="image" type="file">
+
+        @if($project->image)
+        <div id="project-image">
+            <img src="{{ asset("storage/" . $project->image) }}" alt="">
+        </div>
+        @endif
     </div>
 
     <input type="submit" value="Salva">

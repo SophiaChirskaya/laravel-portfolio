@@ -26,11 +26,11 @@
     @endif
 </div>
 
-<section>
-    <p>
-        {{$project->image}}
-    </p>
-</section>
+@if($project->image)
+<div id="project-image">
+  <img src="{{ asset("storage/" . $project->image) }}" alt="">
+</div>
+@endif
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">

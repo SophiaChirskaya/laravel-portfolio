@@ -7,6 +7,7 @@ use App\Models\Project;
 use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -44,7 +45,12 @@ class ProjectController extends Controller
         $newProject->title = $data['title'];
         $newProject->content = $data['content'];
         $newProject->type_id = $data['type_id'];
-        $newProject->image = $data['image'];
+        
+
+        if(array_key_exists("image", $data)) {
+            $img_url = Storage::putFile("projects", $data['image']);
+            $newProject->image = $img_url;
+        }
 
         $newProject->save();
 
@@ -86,7 +92,18 @@ class ProjectController extends Controller
         $project->title = $data['title'];
         $project->content = $data['content'];
         $project->type_id = $data['type_id'];
-        $project->image = $data['image'];
+
+        if(array_key_exists("image", $data)) {
+
+            Storage::delete($project->image);
+
+            $img_url = Storage::putFile("projects", $data['image']);
+
+            $project->image = $img_url;
+        }
+        
+
+    
 
         $project->update();
 
@@ -107,6 +124,10 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        if($project->image) {
+            Storage::delete($project->image);
+        }
+
         $project->delete();
         return redirect()->route("projects.index");
     }
